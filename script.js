@@ -6,8 +6,8 @@
   h = 600,
   padding = 100,
   legendW = 300,
-    legendH = 40,
-    legendPadding = 20;
+  legendH = 50,
+  legendPadding = 20;
 
   // FETCH DATA
   d3.json(countyDataUrl)
@@ -67,7 +67,23 @@
           .attr("transform", "translate(0," + (legendH - legendPadding) + ")")
           .call(legendAxis)
           .attr("id", "legend-axis");
-            
+
+          // LEGEND CELLS
+          let dataArr = [];
+          for(let i = 0; i <= maxPercentage; i += 10){
+            dataArr.push(i)
+          }
+      
+          legend.selectAll("rect")
+          .data(dataArr)
+          .enter()
+          .append("rect")
+          .attr("class", "legendCell")
+          .attr("fill", d => colorScale(d))
+          .attr("x", d => legendScale(d))
+          .attr("y", legendH-legendPadding-((legendW - legendPadding*2)/dataArr.length))
+          .attr("height", (legendW - legendPadding*2)/dataArr.length)
+          .attr("width", (legendW - legendPadding*2)/dataArr.length)
             
           }
           
