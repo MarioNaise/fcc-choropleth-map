@@ -1,7 +1,13 @@
 (function(){
   
-  const educationDataUrl = "https://cdn.freecodecamp.org/testable-projects-fcc/data/choropleth_map/for_user_education.json";
-  const countyDataUrl = "https://cdn.freecodecamp.org/testable-projects-fcc/data/choropleth_map/counties.json";
+  const educationDataUrl = "https://cdn.freecodecamp.org/testable-projects-fcc/data/choropleth_map/for_user_education.json",
+  countyDataUrl = "https://cdn.freecodecamp.org/testable-projects-fcc/data/choropleth_map/counties.json",
+  w = 1000,
+  h = 700,
+  padding = 100,
+  legendW = 600,
+    legendH = 100,
+    legendPadding = 20;
 
   // FETCH DATA
   d3.json(countyDataUrl)
@@ -9,14 +15,19 @@
       if(err){
         console.log(err)
       } else{
+      countyData = topojson.feature(data, data.objects.counties).features
       console.log("county", data)
-
-        // APPEND SVG
 
         // APPEND TOOLTIP
 
         // APPEND LEGEND
 
+        // APPEND SVG
+       const svg = d3.select("main")
+      .append("svg")
+      .attr("width", w)
+      .attr("height", h)
+        
         // RENDER COUNTY MAP
 
         // SET SCALES
