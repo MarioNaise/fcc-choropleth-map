@@ -44,10 +44,15 @@
           } else {
           console.log("education", educationData)
           const maxPercentage = d3.max(educationData, (x)=>x.bachelorsOrHigher);
+
+          // COLORSCALE
+          const colorScale = d3.scaleSequential()
+          .domain([0, maxPercentage])
+          .interpolator(d3.interpolateGreens);
            
           // APPEND LEGEND
           const legendScale = d3.scaleLinear()
-          .domain([0, Math.ceil(maxPercentage)])
+          .domain([0, maxPercentage])
           .range([legendPadding, legendW - legendPadding]);
             
           const legend = d3.select("main")
