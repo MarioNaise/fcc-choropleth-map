@@ -5,22 +5,11 @@
 
   // FETCH DATA
   d3.json(countyDataUrl)
-    .then((countyData, err)=>{
+    .then((data, err)=>{
       if(err){
         console.log(err)
       } else{
-      console.log("county", countyData)
-
-      d3.json(educationDataUrl)
-        .then((educationData, err)=>{
-          if(err){
-        console.log(err)
-          }else{
-          console.log("education", educationData)
-          }
-        });
-
-        // RENDER DESCRIPTION
+      console.log("county", data)
 
         // APPEND SVG
 
@@ -33,10 +22,17 @@
         // SET SCALES
 
         // RENDER AXES
+        
+      d3.json(educationDataUrl)
+        .then((educationData, err)=>{
+          if(err){
+        console.log(err)
+          }else{
+          console.log("education", educationData)
+          }
+        });
 
         // RENDER EDUCATION DATA
-
-          
         
       }
     });
