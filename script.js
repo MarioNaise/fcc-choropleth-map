@@ -3,7 +3,7 @@
   const educationDataUrl = "https://cdn.freecodecamp.org/testable-projects-fcc/data/choropleth_map/for_user_education.json",
   countyDataUrl = "https://cdn.freecodecamp.org/testable-projects-fcc/data/choropleth_map/counties.json",
   w = 1000,
-  h = 700,
+  h = 600,
   padding = 100,
   legendW = 600,
     legendH = 100,
@@ -19,11 +19,13 @@
       console.log("county", data)
 
         // APPEND TOOLTIP
-
-        // APPEND LEGEND
-
+        const tooltip = d3
+      .select("body")
+      .append("div")
+      .attr("id", "tooltip")
+      
         // APPEND SVG
-       const svg = d3.select("main")
+       const svg = d3.select("body")
       .append("svg")
       .attr("width", w)
       .attr("height", h)
@@ -40,10 +42,11 @@
         console.log(err)
           }else{
           console.log("education", educationData)
+        // RENDER EDUCATION DATA
           }
         });
 
-        // RENDER EDUCATION DATA
+        // APPEND LEGEND
         
       }
     });
