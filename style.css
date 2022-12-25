@@ -10,6 +10,12 @@ body{
   font-family: "Arial", sans-serif;
 }
 
+main{
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
 #title, #description{
   text-align: center;
 }

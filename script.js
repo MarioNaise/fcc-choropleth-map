@@ -5,8 +5,8 @@
   w = 1000,
   h = 600,
   padding = 100,
-  legendW = 600,
-    legendH = 100,
+  legendW = 300,
+    legendH = 40,
     legendPadding = 20;
 
   // FETCH DATA
@@ -14,9 +14,9 @@
     .then((data, err)=>{
       if(err){
         console.log(err)
-      } else{
+      } else {
       countyData = topojson.feature(data, data.objects.counties).features
-      console.log("county", data)
+      console.log("county", countyData)
 
       // APPEND TOOLTIP
       const tooltip = d3
@@ -24,6 +24,7 @@
       .append("div")
       .attr("id", "tooltip")
         
+      
       
       // APPEND SVG
       const svg = d3.select("main")
@@ -33,11 +34,7 @@
       
       // RENDER COUNTY MAP
       
-      // SET SCALES
-      const colorscale = d3.scaleSequential()
-      .range([0, 100])
-      .interpolator()
-
+    
       
       // RENDER EDUCATION DATA
       d3.json(educationDataUrl)
@@ -45,26 +42,30 @@
           if(err){
         console.log(err)
           } else {
-            console.log("education", educationData)
+          console.log("education", educationData)
+          const maxPercentage = d3.max(educationData, (x)=>x.bachelorsOrHigher);
+           
+          // APPEND LEGEND
+          const legendScale = d3.scaleLinear()
+          .domain([0, Math.ceil(maxPercentage)])
+          .range([legendPadding, legendW - legendPadding]);
             
-            // APPEND LEGEND
-            const legendScale = d3.scaleLinear()
-            .domain([0, 100])
-            .range([legendPadding, legendW - legendPadding]);
-              
-            const legend = d3.select("main")
-            .append("svg")
-            .attr("id", "legend")
-            .attr("width", legendW)
-            .attr("height", legendH)
-      
-            const legendAxis = d3.axisBottom(legendScale)
-      
-            legend.append("g")
-            .attr("transform", "translate(0," + (legendH - legendPadding) + ")")
-            .call(legendAxis)
-            .attr("id", "legend-axis");
+          const legend = d3.select("main")
+          .append("svg")
+          .attr("id", "legend")
+          .attr("width", legendW)
+          .attr("height", legendH)
+    
+          const legendAxis = d3.axisBottom(legendScale)
+    
+          legend.append("g")
+          .attr("transform", "translate(0," + (legendH - legendPadding) + ")")
+          .call(legendAxis)
+          .attr("id", "legend-axis");
+            
+            
           }
+          
         });
         
       }
