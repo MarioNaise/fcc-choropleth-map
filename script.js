@@ -16,42 +16,38 @@
         console.log(err)
       } else{
       countyData = topojson.feature(data, data.objects.counties).features
-      console.log("county", countyData)
+      console.log("county", data)
 
-      // APPEND TOOLTIP
-      const tooltip = d3
+        // APPEND TOOLTIP
+        const tooltip = d3
       .select("body")
       .append("div")
       .attr("id", "tooltip")
       
-      // APPEND SVG
-      const svg = d3.select("main")
+        // APPEND SVG
+       const svg = d3.select("body")
       .append("svg")
       .attr("width", w)
       .attr("height", h)
         
-      // SET SCALES
-      const colorScale = d3.scaleSequential()
-      .domain([0, 100])
-      .interpolator(d3.interpolateGreens);
+        // RENDER COUNTY MAP
 
-      // APPEND LEGEND
-      const svg = d3.select("main")
-      .append("svg")
-      .attr("width", legendW)
-      .attr("height", legendH)
+        // SET SCALES
+        
 
-      // RENDER COUNTY MAP
+        // RENDER AXES
         
       d3.json(educationDataUrl)
         .then((educationData, err)=>{
           if(err){
         console.log(err)
-          } else {
+          }else{
           console.log("education", educationData)
         // RENDER EDUCATION DATA
           }
         });
+
+        // APPEND LEGEND
         
       }
     });
